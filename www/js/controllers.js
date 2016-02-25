@@ -9,7 +9,6 @@ angular.module('starter.controllers', [])
       $ionicSlideBoxDelegate.enableSlide(false)
     }
   }
-
   var $uploadCrop;
 
   function popupResult(result) {
@@ -74,20 +73,15 @@ angular.module('starter.controllers', [])
       readFile(this);
     });
 
-    $('.upload-result').on('click', function (ev) {
+    $scope.uploadFish = function (ev) {
 
       $uploadCrop.croppie('result', {
         type: 'canvas',
         size: 'viewport'
       }).then(function (data) {
 
-
-        return  popupResult({
-          html: "<h1>スコア: " + 10 + "</h1>"
-        });
-
         socket.post('/question/', {
-          id: 1,
+          cardId: 2,
           answer: data
         }, function (resData) {
           console.log(resData);
@@ -96,7 +90,7 @@ angular.module('starter.controllers', [])
           });
         });
       });
-    });
+    };
 
   });
 })

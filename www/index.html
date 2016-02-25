@@ -23,8 +23,9 @@
       io.sails.autoConnect = false;
       // socket 1 will have session disabled
 //      var socket1 = io.sails.connect('http://localhost', {initialConnectionHeaders: {nosession: true}});
-      // socket 2 will have session enabled
-//      var socket = io.sails.connect('http://localhost:1337');
+//       socket 2 will have session enabled
+      var socket = io.sails.connect('http://54.248.42.8:3000/');
+//        var socket = io.sails.connect('http://localhost:1337/');
     </script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -74,10 +75,12 @@
                     <!--</div>-->
                     <div id="upload-demo"></div>
                   </div>
+                  <div>
+                    <input type="file" id="upload" value="画像をアップロード" >
+                  </div>
 
-                  <input type="file" id="upload" value="画像をアップロード" />
                   <br>
-                  <button class="upload-result button button-full button-assertive">
+                  <button class="upload-result button button-full button-assertive" ng-click="uploadFish()">
                     送信
                   </button>
                 </div>
