@@ -3,14 +3,13 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope, $ionicSlideBoxDelegate) {
 
   $scope.slideHasChanged = function(index){
+    // アップロード画面はスワイプキャンセル
     if(index == 3 ){
-      console.log(index);
-
       $ionicSlideBoxDelegate.enableSlide(false)
     }
   }
-  var $uploadCrop;
 
+  var $uploadCrop;
   function popupResult(result) {
 
     var html;
@@ -21,19 +20,19 @@ angular.module('starter.controllers', [])
       html = '<img src="' + result.src + '" />';
     }
     swal({
-      title: '',
+      title: result.title || '',
       html: true,
       text: html,
       allowOutsideClick: true
     });
-    setTimeout(function(){
-      $('.sweet-alert').css('margin', function() {
-        var top = -1 * ($(this).height() / 2),
-          left = -1 * ($(this).width() / 2);
-
-        return -150 + 'px 0 0 ' + 0 + 'px';
-      });
-    }, 1);
+    //setTimeout(function(){
+      //$('.sweet-alert').css('margin', function() {
+      //  var top = -1 * ($(this).height() / 2),
+      //    left = -1 * ($(this).width() / 2);
+      //
+      //  return -150 + 'px 0 0 ' + 0 + 'px';
+      //});
+    //}, 1);
   }
 
   $(function(){
@@ -86,7 +85,8 @@ angular.module('starter.controllers', [])
         }, function (resData) {
           console.log(resData);
           popupResult({
-            html: "<h1>スコア: " + resData.score + "</h1>"
+            title: resData.match ? "合格!!" : "残念...",
+            html: "<h2>" + resData.target + "</h2><p><img src='" + data + "' /></p>"
           });
         });
       });
