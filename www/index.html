@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="Stylesheet" href="lib/sweetalert/dist/sweetalert.css" />
+    <link rel="Stylesheet" href="lib/Croppie/croppie.css" />
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/jQuery/dist/jquery.min.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/sails.io.js/dist/sails.io.js"></script>
+    <script type="text/javascript">
+      io.sails.autoConnect = false;
+      // socket 1 will have session disabled
+//      var socket1 = io.sails.connect('http://localhost', {initialConnectionHeaders: {nosession: true}});
+      // socket 2 will have session enabled
+//      var socket = io.sails.connect('http://localhost:1337');
+    </script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <script src="lib/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="lib/Croppie/croppie.js"></script>
+
+    <script src="lib/exif-js/exif.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+  </head>
+  <body ng-app="starter">
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">おおさかな大学 ホシエイを探せ</h1>
+      </ion-header-bar>
+      <ion-content>
+        <div class="demo-wrap upload-demo">
+        <div class="container">
+            <div class="grid">
+              <div class="col-1-2">
+                <div class="upload-msg">
+                  写真を選択、ホシエイを選んで送信
+                </div>
+                <div id="upload-demo"></div>
+              </div>
+
+              <input type="file" id="upload" value="画像をアップロード" />
+              <br>
+              <button class="upload-result button button-full button-assertive">
+                送信
+              </button>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>
