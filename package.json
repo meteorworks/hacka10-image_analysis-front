@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "hacka10-front",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "PORT=80 node ./bin/www",
+    "dev": "node ./bin/www --verbose"
   },
   "dependencies": {
     "gulp": "^3.5.6",

@@ -6,7 +6,7 @@
     <title></title>
 
     <link rel="Stylesheet" href="lib/sweetalert/dist/sweetalert.css" />
-    <link rel="Stylesheet" href="lib/Croppie/croppie.css" />
+    <link rel="Stylesheet" href="lib/croppie/croppie.css" />
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -16,7 +16,7 @@
     -->
 
     <!-- ionic/angularjs js -->
-    <script src="lib/jQuery/dist/jquery.min.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/sails.io.js/dist/sails.io.js"></script>
     <script type="text/javascript">
@@ -41,29 +41,51 @@
     <script src="js/services.js"></script>
   </head>
   <body ng-app="starter">
-    <ion-pane>
+    <ion-pane ng-controller="DashCtrl">
       <ion-header-bar class="bar-stable">
         <h1 class="title">おおさかな大学 ホシエイを探せ</h1>
       </ion-header-bar>
       <ion-content>
-        <div class="demo-wrap upload-demo">
-        <div class="container">
-            <div class="grid">
-              <div class="col-1-2">
-                <div class="upload-msg">
-                  写真を選択、ホシエイを選んで送信
-                </div>
-                <div id="upload-demo"></div>
-              </div>
-
-              <input type="file" id="upload" value="画像をアップロード" />
-              <br>
-              <button class="upload-result button button-full button-assertive">
-                送信
-              </button>
+        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+          <ion-slide>
+            <div>
+              <img src="http://placekitten.com/640/960?image=1" alt="">
             </div>
-          </div>
-        </div>
+          </ion-slide>
+
+          <ion-slide>
+            <div>
+              <img src="http://placekitten.com/640/960?image=2" alt="">
+            </div>
+          </ion-slide>
+
+          <ion-slide>
+            <div>
+              <img src="http://placekitten.com/640/960?image=3" alt="">
+            </div>
+          </ion-slide>
+          <ion-slide active-slide="false">
+            <div class="demo-wrap upload-demo">
+              <div class="container">
+                <div class="grid">
+                  <div class="col-1-2">
+                    <!--<div class="upload-msg">-->
+                      <!--写真を選択、ホシエイを選んで送信-->
+                    <!--</div>-->
+                    <div id="upload-demo"></div>
+                  </div>
+
+                  <input type="file" id="upload" value="画像をアップロード" />
+                  <br>
+                  <button class="upload-result button button-full button-assertive">
+                    送信
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </ion-slide>
+        </ion-slide-box>
       </ion-content>
     </ion-pane>
   </body>
