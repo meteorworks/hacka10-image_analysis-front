@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicSlideBoxDelegate) {
+.controller('DashCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate) {
 
   $scope.slideHasChanged = function(index){
     // アップロード画面はスワイプキャンセル
@@ -74,6 +74,10 @@ angular.module('starter.controllers', [])
 
     $scope.uploadFish = function (ev) {
 
+      $ionicLoading.show({
+        template: '<ion-spinner icon="spiral"></ion-spinner> 解析中...'
+      });
+
       $uploadCrop.croppie('result', {
         type: 'canvas',
         size: 'viewport'
@@ -84,6 +88,7 @@ angular.module('starter.controllers', [])
           answer: data
         }, function (resData) {
           console.log(resData);
+          $ionicLoading.hide();
           popupResult({
             title: resData.match ? "合格!!" : "残念...",
             html: "<h2>" + resData.target + "</h2><p><img src='" + data + "' /></p>"
