@@ -2,60 +2,68 @@
 
 FROM alpacadb/labellio-caffe-image
 
+#RUN echo 8.8.8.8 > /etc/hosts; cat /etc/hosts
+#RUN cat /etc/hosts
+
 RUN apt-get -y update
-
-RUN apt-get install -y python-software-properties
-
 RUN apt-get -y upgrade
+RUN apt-get -y dist-upgrade
 
 RUN apt-get -y install build-essential
-RUN apt-get -y install git
-RUN apt-get -y install curl
+
+RUN apt-get -y install software-properties-common
 
 RUN add-apt-repository -y ppa:chris-lea/node.js
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get install -y nodejs
+RUN apt-get -y update
 
-# RUN apt-get -y install openssh-server
-# RUN mkdir -p /var/run/sshd
-# RUN useradd -d /home/k5m -m -s /bin/bash k5m
-# RUN echo hogehoge:${your_pass} | chpasswd
-# RUN echo 'hogepass ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN apt-get -y install git
+RUN apt-get -y install curl
+
+RUN apt-get -y install pkg-config make g++
+RUN apt-get -y install python-software-properties
+
+RUN apt-get -y install nodejs
 
 # labellio_cli
 RUN . /opt/caffe/caffe.bashrc
 RUN sudo pip install -U labellio_cli
 
+# redis-server
 RUN apt-get -y install redis-server
 RUN service redis-server start
 
-#RUN curl -L git.io/nodebrew | perl - setup
-#RUN echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> /root/.bashrc
+# ssh準備
+RUN mkdir /root/.ssh/
 
-#RUN . /root/.bashrc
+# private keyをコピー
+ADD docker/id_rsa /root/.ssh/id_rsa
 
-#RUN echo 'nodebrew use default' >> /root/.bashrc
+ADD docker/config /root/.ssh/config
 
+# known_hosts設定
+ Create known_hosts & Add bitbuckets key
+RUN \
+  touch /root/.ssh/known_hosts && \
+  ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
 
+# NodeJS 準備
 RUN mkdir -p /root/node-server/
 
-#RUN nodebrew install-binary v4.3.1
-#RUN nodebrew alias default v4.3.1
-#RUN nodebrew use default
+RUN rm -rf /root/node-server/hacka10-server
+RUN git clone git@bitbucket.org:meteorworks/gazou-server.git /root/node-server/hacka10-server
 
-RUN cd node-server
-RUN git clone git@bitbucket.org:meteorworks/gazou-server.git hacka10-server
-RUN cd hacka10-server/
+WORKDIR /root/node-server/hacka10-server/
+
 RUN npm i
 RUN pm2 start process.js
-
-
 
 EXPOSE 80
 
 # Define working directory.
-WORKDIR /data
+#WORKDIR /data
 
 # Define default command.
 CMD ["bash"]
+
+ENTRYPOINT /usr/bin/tail -f /dev/null
