@@ -12,8 +12,6 @@ RUN apt-get -y dist-upgrade
 RUN apt-get -y install build-essential
 
 RUN apt-get -y install software-properties-common
-
-RUN apt-get -y install pkg-config make g++
 RUN apt-get -y install python-software-properties
 
 RUN add-apt-repository -y ppa:chris-lea/node.js
@@ -47,15 +45,18 @@ RUN \
   touch /root/.ssh/known_hosts && \
   ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
 
+RUN ssh-keygen -R 104.192.143.1
+
 # NodeJS 準備
 RUN mkdir -p /root/node-server/
-
 RUN rm -rf /root/node-server/hacka10-server
+
 RUN git clone git@bitbucket.org:meteorworks/gazou-server.git /root/node-server/hacka10-server
 
 WORKDIR /root/node-server/hacka10-server/
 
 RUN npm i
+RUN npm i -g pm2
 RUN pm2 start process.js
 
 EXPOSE 80
