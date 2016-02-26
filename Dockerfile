@@ -13,15 +13,15 @@ RUN apt-get -y install build-essential
 
 RUN apt-get -y install software-properties-common
 
+RUN apt-get -y install pkg-config make g++
+RUN apt-get -y install python-software-properties
+
 RUN add-apt-repository -y ppa:chris-lea/node.js
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list
 RUN apt-get -y update
 
 RUN apt-get -y install git
 RUN apt-get -y install curl
-
-RUN apt-get -y install pkg-config make g++
-RUN apt-get -y install python-software-properties
 
 RUN apt-get -y install nodejs
 
@@ -42,7 +42,7 @@ ADD docker/id_rsa /root/.ssh/id_rsa
 ADD docker/config /root/.ssh/config
 
 # known_hosts設定
- Create known_hosts & Add bitbuckets key
+# Create known_hosts & Add bitbuckets key
 RUN \
   touch /root/.ssh/known_hosts && \
   ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
