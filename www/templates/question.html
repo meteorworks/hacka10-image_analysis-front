@@ -1,13 +1,48 @@
-<!--<ion-view view-title="Account">-->
-  <!--<ion-content>-->
-    <!--<ion-list>-->
-    <!--<ion-toggle  ng-model="settings.enableFriends">-->
-        <!--Enable Friends-->
-    <!--</ion-toggle>-->
-    <!--</ion-list>-->
-  <!--</ion-content>-->
-<!--</ion-view>-->
 
-<div class="bar bar-header bar-light">
-  <h1 class="title">bar-light</h1>
-</div>
+<ion-view>
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">おおさかな大学 ホシエイを探せ</h1>
+  </ion-header-bar>
+  <ion-content ng-controller="DashCtrl">
+    <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+      <ion-slide>
+        <div>
+          <img src="img/stap01.jpg" alt="">
+        </div>
+      </ion-slide>
+      <!--<ion-slide>-->
+      <!--<div>-->
+      <!--<img src="http://placekitten.com/640/960?image=2" alt="">-->
+      <!--</div>-->
+      <!--</ion-slide>-->
+
+      <!--<ion-slide>-->
+      <!--<div>-->
+      <!--<img src="http://placekitten.com/640/960?image=3" alt="">-->
+      <!--</div>-->
+      <!--</ion-slide>-->
+
+      <ion-slide>
+        <div class="demo-wrap upload-demo">
+          <div class="container">
+            <div class="grid">
+              <div class="col-1-2">
+                <!--<div class="upload-msg">-->
+                <!--写真を選択、ホシエイを選んで送信-->
+                <!--</div>-->
+                <div id="upload-demo"></div>
+              </div>
+              <div>
+                <input type="file" id="upload" value="画像をアップロード" >
+              </div>
+              <br>
+              <button class="upload-result button button-full button-assertive" ng-click="uploadFish()">
+                送信
+              </button>
+            </div>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-view>

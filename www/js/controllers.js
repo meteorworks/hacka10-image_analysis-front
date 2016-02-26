@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate) {
+.controller('DashCtrl', function($scope, $state, $timeout, $ionicLoading, $ionicSlideBoxDelegate) {
 
   $scope.slideHasChanged = function(index){
     // アップロード画面はスワイプキャンセル
@@ -72,7 +72,27 @@ angular.module('starter.controllers', [])
       readFile(this);
     });
 
+    $scope.isSearching =false;
+
+    $scope.error = function(error){
+
+      popupResult({
+        title: resData.match ? "合格!!" : "残念...",
+        html: "<p>" + resData.target + "</p><p><img src='" + data + "' /></p>"
+      });
+    };
+
     $scope.uploadFish = function (ev) {
+
+      $scope.isSearching = true;
+      $timeout(function(){
+        if($scope.isSearching){
+          $ionicLoading.hide();
+
+          $scope.isSearching = false;
+          $scope.error("通信タイムアウト");
+        }
+      }, 30 * 1000);
 
       $ionicLoading.show({
         template: '<ion-spinner icon="spiral"></ion-spinner> 解析中...'
@@ -84,39 +104,31 @@ angular.module('starter.controllers', [])
       }).then(function (data) {
 
         socket.post('/question/', {
-          cardId: 2,
+          cardId: $state.params.id || 100,
           answer: data
         }, function (resData) {
+
           console.log(resData);
+
           $ionicLoading.hide();
+
+          if($scope.isSearching == false) return;
+
+          if(resData==null){
+            $scope.error("通信エラー");
+            return;
+          }
+
           popupResult({
             title: resData.match ? "合格!!" : "残念...",
-            html: "<h2>" + resData.target + "</h2><p><img src='" + data + "' /></p>"
+            html: "<p>" + resData.target + "</p><p><img src='" + data + "' /></p>"
           });
+
         });
       });
     };
 
   });
-})
-
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
 })
 
 .controller('AccountCtrl', function($scope) {
