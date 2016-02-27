@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
 
   $scope.slideHasChanged = function(index){
     // アップロード画面はスワイプキャンセル
-    if(index == 1 ){
+    if(index == 3 ){
       $ionicSlideBoxDelegate.enableSlide(false)
     }
   }

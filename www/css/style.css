@@ -1,4 +1,11 @@
 /* Empty. Add your own CSS if you like */
+ion-content{
+  background-color: #33cbde !important;
+}
+
+.cr-vp-circle{
+  background-color: #fff;
+}
 
 .croppie-container{
   padding: 0 0 20px 0 !important;
@@ -36,3 +43,5 @@ ion-content img{
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
+
+

@@ -1,8 +1,0 @@
-Host github.com
-  StrictHostKeyChecking no
-
-Host bitbucket.org
-  StrictHostKeyChecking no
-  User git
-  PreferredAuthentications publickey
-  IdentityFile /root/.ssh/id_rsa
