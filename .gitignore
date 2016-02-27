@@ -8,3 +8,4 @@ plugins/
 docker/id_rsa
 dump.rdb
 
+ .DS_Store

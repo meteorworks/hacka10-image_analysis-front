@@ -3,8 +3,12 @@ ion-content{
   background-color: #33cbde !important;
 }
 
-.cr-vp-circle{
-  background-color: #fff;
+ion-slide{
+  min-height: 100vh !important;
+}
+
+#upload-slide{
+  background-color: #fff !important;
 }
 
 .croppie-container{
