@@ -51,21 +51,22 @@
     <!--</ion-header-bar>-->
     <ion-content ng-controller="DashCtrl">
       <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
-        <ion-slide>
+        <ion-slide on-tap="nextSlide()">
           <div>
             <img src="img/step01.png" alt="">
           </div>
         </ion-slide>
-        <ion-slide>
-        <div>
-        <img src="img/step02.png" alt="">
-        </div>
+
+        <ion-slide on-tap="nextSlide()">
+          <div>
+            <img src="img/step02.png" alt="">
+          </div>
         </ion-slide>
 
-        <ion-slide>
-        <div>
-        <img src="img/step03.png" alt="">
-        </div>
+        <ion-slide on-tap="nextSlide()">
+          <div>
+            <img src="img/step03.png" alt="">
+          </div>
         </ion-slide>
 
         <ion-slide id="upload-slide">

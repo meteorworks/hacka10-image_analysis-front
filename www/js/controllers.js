@@ -7,6 +7,10 @@ angular.module('starter.controllers', [])
     if(index == 3 ){
       $ionicSlideBoxDelegate.enableSlide(false)
     }
+  };
+
+  $scope.nextSlide = function(next){
+    $ionicSlideBoxDelegate.next();
   }
 
   var $uploadCrop;
