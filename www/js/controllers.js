@@ -61,8 +61,8 @@ angular.module('starter.controllers', [])
 
     $uploadCrop = $('#upload-demo').croppie({
       viewport: {
-        width: 200,
-        height: 200,
+        width: 160,
+        height: 160,
         type: 'circle'
       },
       boundary: {
