@@ -48,4 +48,21 @@ ion-content img{
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
+.sweet-alert fieldset{
+  display: none !important;
+}
 
+.sweet-alert h2{
+  margin: 0px !important;
+}
+
+.sweet-alert h2 {
+  position: absolute;
+  width: 100%;
+  margin: 0px !important;
+  padding: 0px !important;
+  top: 0px;
+  left: -10px;
+  text-align: left;
+  z-index: 10000;
+}

@@ -66,8 +66,8 @@ angular.module('starter.controllers', [])
         type: 'circle'
       },
       boundary: {
-        width: 320,
-        height: 320
+        width: 260,
+        height: 260
       },
       exif: true
     });
@@ -79,22 +79,21 @@ angular.module('starter.controllers', [])
     $scope.isSearching =false;
 
     $scope.error = function(error){
-
       popupResult({
-        title: resData.match ? "合格!!" : "残念...",
-        html: "<p>" + resData.target + "</p><p><img src='" + data + "' /></p>"
+        title: "エラー",
+        html: "<p>" + error
       });
     };
 
     $scope.uploadFish = function (ev) {
 
       $scope.isSearching = true;
-      $timeout(function(){
+      var errProc = $timeout(function(){
         if($scope.isSearching){
           $ionicLoading.hide();
 
           $scope.isSearching = false;
-          $scope.error("通信タイムアウト");
+          $scope.error("");
         }
       }, 30 * 1000);
 
@@ -106,6 +105,8 @@ angular.module('starter.controllers', [])
         type: 'canvas',
         size: 'viewport'
       }).then(function (data) {
+
+        $timeout.cancel(errProc);
 
         socket.post('/question/', {
           cardId: $state.params.id || 100,
@@ -119,12 +120,12 @@ angular.module('starter.controllers', [])
           if($scope.isSearching == false) return;
 
           if(resData==null){
-            $scope.error("通信エラー");
+            $scope.error("");
             return;
           }
 
           popupResult({
-            title: resData.match ? "合格!!" : "残念...",
+            title: resData.match ? "<img src='/img/oosakana-04.png' width='150' height='150' />" : "<img src='/img/oosakana-05.png' width='150' height='150' />",
             html: "<p>" + resData.target + "</p><p><img src='" + data + "' /></p>"
           });
 
